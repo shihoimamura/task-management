@@ -7,15 +7,15 @@ default: &default
 
 development:
   <<: *default
-  database: task_development
+  database: task_app_development
 
 test:
   <<: *default
-  database: task_test
+  database: task_app_test
 
 
 production:
   <<: *default
-  database: task_production
-  username: task
-  password: <%= ENV['TASK_DATABASE_PASSWORD'] %>
+  database: task_app_production
+  username: task_app
+  password: <%= ENV['task_app_DATABASE_PASSWORD'] %>

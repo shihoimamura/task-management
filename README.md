@@ -6,7 +6,7 @@
 
 | モデル名 | カラム名     | データ型 |
 |----------|--------|----------|
-| Task     | id           | integer  |
+| TaskApp     | id           | integer  |
 |          | task_name    | string   |
 |          | task_content | string   |
 |          | deadline     | string   |
