@@ -15,6 +15,11 @@
     <%= form.text_field :content %>
   </div>
   <div>
+  <%= form.label :content, "終了期限" %>
+  <%= form.date_field :enddate %>
+  </div>
+
+  <div>
     <%= form.submit "保存" %>
   </div>
 <% end %>

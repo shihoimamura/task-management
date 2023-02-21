@@ -4,6 +4,8 @@
   <% @tasks.each do |task| %>
   <li>
     <span class="task-title"><%= task.title %></span>
+    <span class="task-enddate"><%= task.enddate %></span>
+
     <%= link_to "詳細", task %>
     <%= link_to "編集", edit_task_path(task) %>
     <%= link_to "削除", task, method: :delete %>
@@ -12,3 +14,4 @@
 </ul>
 
 <%= link_to "新規登録", new_task_path %>
+<%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
