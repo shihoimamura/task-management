@@ -15,6 +15,10 @@
     <%= form.text_field :content %>
   </div>
   <div>
+  <%= form.label :priority, "優先順位" %>
+  <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]] ,class:"form-control" %>
+</div>
+  <div>
     <%= form.label :status, "ステータス" %>
     <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]] ,class:"form-control" %>
   </div>

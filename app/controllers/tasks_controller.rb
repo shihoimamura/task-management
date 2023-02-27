@@ -1,15 +1,22 @@
 class TasksController < ApplicationController
   # 一覧画面
   def index
-
     @tasks = Task.all.order(created_at: :desc)
 
     if params[:sort_expired] == "true"
       @tasks = Task.all.order(enddate: :desc)
     end
 
-    if params[:task]&&params[:task][:title]
-      @tasks = Task.where('title like ?',"%#{params[:task][:title]}%")
+    if params[:task]&&params[:task][:title].present?
+      @tasks = Task.search_title(params[:task][:title])
+    end
+
+    if params[:task]&&params[:task][:priority].present?
+      @tasks = @tasks.search_priority(params[:task][:priority])
+    end
+
+    if params[:task]&&params[:task][:status].present?
+      @tasks = @tasks.search_status(params[:task][:status])
     end
   end
 
@@ -18,7 +25,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  # 新規登録画面
   def new
     @task = Task.new
   end
@@ -31,6 +37,7 @@ class TasksController < ApplicationController
     else
       render "new"
     end
+
   end
 
   # 編集画面

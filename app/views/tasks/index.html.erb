@@ -1,9 +1,17 @@
 <h2>タスク一覧</h2>
-<%= form_with scope: :task, method: :get do |form| %>
+<%= form_with scope: :task, method: :get, url: tasks_path do |form| %>
   <div>
     <%= form.label :title, "タイトル" %>
     <%= form.text_field :title %>
   </div>
+  <div>
+    <%= form.label :status, "ステータス" %>
+    <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], { include_blank: '選択してください'}, {class:"form-control"} %>
+  </div>
+  <div>
+  <%= form.label :priority, "優先順位" %>
+  <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], { include_blank: '選択してください'}, {class:"form-control"} %>
+</div>
   <%= form.submit %>
 <%end%>
 
@@ -12,6 +20,7 @@
     <span class="task-title"><%= task.title %></span>
     <span class="task-enddate"><%= task.enddate %></span>
     <span class="task-status"><%= task.status %></span>
+    <span class="task-priority"><%= task.priority %></span>
     <%= link_to "詳細", task %>
     <%= link_to "編集", edit_task_path(task) %>
     <%= link_to "削除", task, method: :delete %>
