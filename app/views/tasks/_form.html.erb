@@ -15,8 +15,11 @@
     <%= form.text_field :content %>
   </div>
   <div>
-  <%= form.label :content, "終了期限" %>
-  <%= form.date_field :enddate %>
+    <%= form.label :status, "ステータス" %>
+    <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]] ,class:"form-control" %>
+  </div>
+    <%= form.label :content, "終了期限" %>
+    <%= form.date_field :enddate %>
   </div>
 
   <div>

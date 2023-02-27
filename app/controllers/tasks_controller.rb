@@ -1,10 +1,15 @@
 class TasksController < ApplicationController
   # 一覧画面
   def index
+
     @tasks = Task.all.order(created_at: :desc)
 
     if params[:sort_expired] == "true"
       @tasks = Task.all.order(enddate: :desc)
+    end
+
+    if params[:task]&&params[:task][:title]
+      @tasks = Task.where('title like ?',"%#{params[:task][:title]}%")
     end
   end
 
@@ -55,6 +60,6 @@ class TasksController < ApplicationController
 
   # Strong Parameters
   def task_params
-    params.require(:task).permit(:title, :content, :enddate)
+    params.require(:task).permit(:title, :content, :enddate, :status)
   end
 end

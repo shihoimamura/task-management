@@ -1,17 +1,22 @@
 <h2>タスク一覧</h2>
+<%= form_with scope: :task, method: :get do |form| %>
+  <div>
+    <%= form.label :title, "タイトル" %>
+    <%= form.text_field :title %>
+  </div>
+  <%= form.submit %>
+<%end%>
 
-<ul>
-  <% @tasks.each do |task| %>
+<% @tasks.each do |task| %>
   <li>
     <span class="task-title"><%= task.title %></span>
     <span class="task-enddate"><%= task.enddate %></span>
-
+    <span class="task-status"><%= task.status %></span>
     <%= link_to "詳細", task %>
     <%= link_to "編集", edit_task_path(task) %>
     <%= link_to "削除", task, method: :delete %>
   </li>
-  <% end %>
-</ul>
+<% end %>
 
 <%= link_to "新規登録", new_task_path %>
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
