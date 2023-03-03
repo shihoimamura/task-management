@@ -70,3 +70,10 @@ gem 'net-pop'
 gem 'enum_help'
 
 gem 'kaminari'
+
+
+gem 'spring-commands-rspec'
+
+gem 'faker'
+gem 'launchy'
+
