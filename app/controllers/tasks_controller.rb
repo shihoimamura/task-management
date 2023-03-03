@@ -18,6 +18,11 @@ class TasksController < ApplicationController
     if params[:task]&&params[:task][:status].present?
       @tasks = @tasks.search_status(params[:task][:status])
     end
+
+
+    @tasks = @tasks.page(params[:page]).per(5)
+
+
   end
 
   # 詳細画面
@@ -67,6 +72,6 @@ class TasksController < ApplicationController
 
   # Strong Parameters
   def task_params
-    params.require(:task).permit(:title, :content, :enddate, :status)
+    params.require(:task).permit(:title, :content, :enddate, :status, :priority)
   end
 end

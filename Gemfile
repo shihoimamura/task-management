@@ -68,3 +68,5 @@ gem 'net-imap'
 gem 'net-pop'
 
 gem 'enum_help'
+
+gem 'kaminari'
