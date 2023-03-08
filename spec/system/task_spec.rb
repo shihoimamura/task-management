@@ -75,6 +75,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       # 必要に応じて、テストデータの内容を変更して構わない
       FactoryBot.create(:task)
       FactoryBot.create(:second_task)
+      FactoryBot.create(:third_task)
     end
 
     context 'タイトルであいまい検索をした場合' do
@@ -111,6 +112,30 @@ RSpec.describe 'タスク管理機能', type: :system do
         # 画面に見積もりというタスクだけが表示される
         expect(page).to have_content 'test見積もり'
         expect(page).not_to have_content 'test_title'
+      end
+    end
+    context '優先順位でソートするというリンクをクリックした場合' do
+      it '優先順位が降順で表示される' do
+        visit tasks_path
+        click_link "優先順位でソートする"
+        sleep(1)
+        task_list = all(".task-title")
+        expect(task_list.size).to eq 3
+        expect(task_list[0]).to have_content "test_title"
+        expect(task_list[1]).to have_content "test見積もり"
+        expect(task_list[2]).to have_content "うさぎ"
+      end
+    end
+    context '終了期限でソートするというリンクをクリックした場合' do
+      it '終了期限が降順で表示される' do
+        visit tasks_path
+        click_link "終了期限でソートする"
+        sleep(1)
+        task_list = all(".task-title")
+        expect(task_list.size).to eq 3
+        expect(task_list[0]).to have_content "test_title"
+        expect(task_list[1]).to have_content "test見積もり"
+        expect(task_list[2]).to have_content "うさぎ"
       end
     end
   end

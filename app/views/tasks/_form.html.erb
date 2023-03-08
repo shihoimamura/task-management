@@ -16,7 +16,7 @@
   </div>
   <div>
   <%= form.label :priority, "優先順位" %>
-  <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]] ,class:"form-control" %>
+  <%= form.select :priority, Task.priorities.keys, class:"form-control" %>
 </div>
   <div>
     <%= form.label :status, "ステータス" %>

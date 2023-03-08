@@ -7,6 +7,10 @@ class TasksController < ApplicationController
       @tasks = Task.all.order(enddate: :desc)
     end
 
+    if params[:sort_priority] == "true"
+      @tasks = Task.all.order(priority: :desc)
+    end
+
     if params[:task]&&params[:task][:title].present?
       @tasks = Task.search_title(params[:task][:title])
     end
