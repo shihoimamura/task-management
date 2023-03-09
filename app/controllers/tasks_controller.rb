@@ -2,6 +2,31 @@ class TasksController < ApplicationController
   # 一覧画面
   def index
     @tasks = Task.all.order(created_at: :desc)
+
+    if params[:sort_expired] == "true"
+      @tasks = Task.all.order(enddate: :desc)
+    end
+
+    if params[:sort_priority] == "true"
+      @tasks = Task.all.order(priority: :desc)
+    end
+
+    if params[:task]&&params[:task][:title].present?
+      @tasks = Task.search_title(params[:task][:title])
+    end
+
+    if params[:task]&&params[:task][:priority].present?
+      @tasks = @tasks.search_priority(params[:task][:priority])
+    end
+
+    if params[:task]&&params[:task][:status].present?
+      @tasks = @tasks.search_status(params[:task][:status])
+    end
+
+
+    @tasks = @tasks.page(params[:page]).per(5)
+
+
   end
 
   # 詳細画面
@@ -9,7 +34,6 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  # 新規登録画面
   def new
     @task = Task.new
   end
@@ -22,6 +46,7 @@ class TasksController < ApplicationController
     else
       render "new"
     end
+
   end
 
   # 編集画面
@@ -51,6 +76,6 @@ class TasksController < ApplicationController
 
   # Strong Parameters
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :enddate, :status, :priority)
   end
 end
