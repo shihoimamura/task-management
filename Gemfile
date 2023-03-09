@@ -77,3 +77,5 @@ gem 'spring-commands-rspec'
 gem 'faker'
 gem 'launchy'
 
+gem 'bcrypt'
+
