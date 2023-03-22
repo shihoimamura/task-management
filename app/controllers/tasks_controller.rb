@@ -1,18 +1,19 @@
 class TasksController < ApplicationController
   # 一覧画面
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    @tasks = current_user.tasks.order(created_at: :desc)
+
 
     if params[:sort_expired] == "true"
-      @tasks = Task.all.order(enddate: :desc)
+      @tasks = @tasks.all.order(enddate: :desc)
     end
 
     if params[:sort_priority] == "true"
-      @tasks = Task.all.order(priority: :desc)
+      @tasks = @tasks.all.order(priority: :desc)
     end
 
     if params[:task]&&params[:task][:title].present?
-      @tasks = Task.search_title(params[:task][:title])
+      @tasks = @tasks.search_title(params[:task][:title])
     end
 
     if params[:task]&&params[:task][:priority].present?
@@ -46,6 +47,8 @@ class TasksController < ApplicationController
     else
       render "new"
     end
+
+
 
   end
 
