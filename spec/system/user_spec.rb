@@ -124,7 +124,7 @@ describe 'ユーザ機能', type: :system do
           click_button "Log in"
           visit admin_users_path
 
-          visit new_user_path
+          visit new_admin_user_path
           fill_in "user_name", with: "baba"
           fill_in "user_email", with: "baba@com"
           fill_in "user_password", with: "password"

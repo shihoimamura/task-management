@@ -17,7 +17,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.includes(:task)
+    @users = User.includes(:tasks)
   end
 
   def show
