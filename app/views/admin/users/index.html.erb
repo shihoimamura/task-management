@@ -1,0 +1,15 @@
+<h2>ユーザー一覧</h2>
+
+<% @users.each do |user| %>
+  <li>
+    <td><%= link_to '詳細を確認する', admin_user_path(user.id) %></td>
+    <span class="user-name"><%= user.name %></span>
+    <span class="user-email"><%= user.email %></span>
+    <span class="user-email"><%= user.tasks.size %></span>
+    <%= link_to "編集", edit_admin_user_path(user), class: "btn btn-success" %>
+    <%= link_to "削除", admin_user_path(user), method: :delete, class: "btn btn-danger" %>
+  </li>
+<% end %>
+<%= link_to "ユーザー作成", new_admin_user_path %>
+
+
