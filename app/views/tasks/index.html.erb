@@ -21,6 +21,7 @@
 
 <% @tasks.each do |task| %>
   <li>
+  <span class="task-name"><%= task.user.name %></span>
     <span class="task-title"><%= task.title %></span>
     <span class="task-enddate"><%= task.enddate %></span>
     <span class="task-status"><%= task.status %></span>

@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_action :login_required, only: [:new, :create]
+
   def new
+    if current_user
+      redirect_to tasks_path
+    end
     @user = User.new
   end
 
