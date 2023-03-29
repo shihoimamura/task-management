@@ -13,11 +13,13 @@
     <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], { include_blank: '選択してください'}, {class:"form-control"} %>
   </div>
   <div>
-  <%= form.label :priority, "優先順位" %>
-  <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], { include_blank: '選択してください'}, {class:"form-control"} %>
-</div>
+    <%= form.label :priority, "優先順位" %>
+    <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], { include_blank: '選択してください'}, {class:"form-control"} %>
+  </div>
+
+  <%= form.select(:label_id, Label.pluck(:name, :id), { include_blank: true }) %>
   <%= form.submit "送信" %>
-<%end%>
+<% end %>
 
 <% @tasks.each do |task| %>
   <li>
@@ -26,11 +28,18 @@
     <span class="task-enddate"><%= task.enddate %></span>
     <span class="task-status"><%= task.status %></span>
     <span class="task-priority"><%= task.priority %></span>
+
+    <% task.labels.each do |label| %>
+      <%= label.name %>
+    <% end %>
+
     <%= link_to "詳細", task, class: "btn btn-info" %>
     <%= link_to "編集", edit_task_path(task), class: "btn btn-success" %>
     <%= link_to "削除", task, method: :delete, class: "btn btn-danger" %>
   </li>
 <% end %>
+
+
 
 <%= link_to "新規登録", new_task_path %>
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>

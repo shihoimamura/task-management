@@ -16,6 +16,12 @@
 
 <p><%= @task.priority %></p>
 
+<h3>ラベル</h3>
+
+<p><% @task.labels.each do |label| %></p>
+<span class="task-name"><%= label.name %></span>
+<% end %>
+
 <h3>終了期限</h3>
 
 <p><%= @task.enddate %></p>

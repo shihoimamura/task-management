@@ -3,7 +3,6 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks.order(created_at: :desc)
 
-
     if params[:sort_expired] == "true"
       @tasks = @tasks.all.order(enddate: :desc)
     end
@@ -22,6 +21,10 @@ class TasksController < ApplicationController
 
     if params[:task]&&params[:task][:status].present?
       @tasks = @tasks.search_status(params[:task][:status])
+    end
+
+    if params[:task] && params[:task][:label_id].present?
+      @tasks = Label.search_label(params[:task][:label_id])
     end
 
 
@@ -47,9 +50,6 @@ class TasksController < ApplicationController
     else
       render "new"
     end
-
-
-
   end
 
   # 編集画面
@@ -84,6 +84,6 @@ class TasksController < ApplicationController
 
   # Strong Parameters
   def task_params
-    params.require(:task).permit(:title, :content, :enddate, :status, :priority)
+    params.require(:task).permit(:title, :content, :enddate, :status, :priority, { label_ids: [] })
   end
 end
