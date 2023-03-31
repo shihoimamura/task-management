@@ -13,17 +13,19 @@
 # )
 10.times do |n|
    User.create!(
-     email: "test#{n + 1}@test.com",
-     name: "テスト太郎#{n + 1}"
+     email: "test3#{n + 1}@test.com",
+     name: "テスト太郎#{n + 1}",
+     password: "password"
    )
  end
 
  User.all.each do |user|
    user.tasks.create!(
-   title: 'タイトル'
-   content: 'テスト'
-   enddate: '終了期限'
-   status: 'ステータス'
-   priority: '優先順位'
+     title: 'タイトル',
+     content: 'テスト',
+     enddate: '終了期限',
+     status: 'ステータス',
+     priority: '高'
+
    )
  end
